@@ -1,55 +1,4 @@
 Rails.application.routes.draw do
-  namespace :public do
-    get 'relationships/follower'
-    get 'relationships/followed'
-    get 'relationships/create'
-    get 'relationships/destroy'
-  end
-  namespace :public do
-    get 'messsages/index'
-    get 'messsages/show'
-    get 'messsages/create'
-    get 'messsages/destroy'
-  end
-  namespace :public do
-    get 'favoretes/create'
-    get 'favoretes/destroy'
-  end
-  namespace :public do
-    get 'posts/new'
-    get 'posts/index'
-    get 'posts/show'
-    get 'posts/create'
-    get 'posts/edit'
-    get 'posts/update'
-    get 'posts/destroy'
-  end
-  namespace :public do
-    get 'users/mypage'
-    get 'users/edit'
-    get 'users/show'
-    get 'users/update'
-    get 'users/destroy'
-  end
-  namespace :public do
-    get 'homes/top'
-    get 'homes/about'
-  end
-  namespace :admin do
-    get 'users/index'
-    get 'users/edit'
-    get 'users/update'
-    get 'users/destroy'
-  end
-  namespace :admin do
-    get 'posts/edit'
-    get 'posts/update'
-    get 'posts/destroy'
-  end
-  namespace :admin do
-    get 'homes/top'
-    get 'homes/about'
-  end
   devise_for :users,skip: [:passwords], controllers: {
     registrations: "public/registrations",
     sessions: 'public/sessions'
@@ -59,6 +8,55 @@ Rails.application.routes.draw do
   devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
   sessions: "admin/sessions"
   }
+
+
+  scope module: :public do
+    #homesコントローラー
+    root to:"homes#top"
+    get "about" => "homes#about"
+
+    #usersコントローラー
+    resources :users, only: [:edit, :show, :update, :destroy]
+    get "my_page" => "users#my_page"
+
+    #postsコントローラー
+    resources :posts, only: [:new, :index, :show, :create, :edit, :update, :destroy]
+
+    #favoretesコントローラー
+    post "favorites/:id" => "favorites#create" ,as: "favorites"
+    delete "favorites/:id" => "favorites#destroy"
+
+    #messagesコントローラー
+    get "users/:id/messages" => "messages#index" ,as: "messages"
+    get "users/:id/messages/:id" => "messages#show"
+    post "users/:id/messages" => "messages#create"
+    delete "users/:id/messages/:id" => "messages#destroy"
+
+    #relationshipsコントローラー
+    get "users/:id/relationships/follower" => "relationships#follower" ,as: "follower"
+    get "users/:id/relationships/followed" => "relationships#followed" ,as: "followed"
+    post "users/:id/relationships" => "relationships#create" ,as: "relationships"
+    delete "users/:id/relationships/:id" => "relationships#destroy"
+
+  end
+
+  namespace :admin do
+    #homesコントローラー
+    root to: "homes#top"
+    get "about" => "homes#about"
+    
+    #postsコントローラー
+    get "posts/:id" => "posts#edit"
+    get "posts/:id" => "posts#update"
+    get "posts/:id" => "posts#destroy"
+
+    #usersコントローラー
+    get "users" => "users#index"
+    get "users/:id" => "users#edit"
+    get "users/:id" => "users#update"
+    get "users/:id" => "users#destroy"
+  end
+
 
   
 end
