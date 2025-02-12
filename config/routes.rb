@@ -18,7 +18,7 @@ Rails.application.routes.draw do
 
     #usersコントローラー
     resources :users, only: [:edit, :show, :update, :destroy]
-    get "my_page", to: "users#my_page"
+    get "my_page", to: "users#mypage"
 
     #postsコントローラー
     resources :posts, only: [:new, :index, :show, :create, :edit, :update, :destroy]

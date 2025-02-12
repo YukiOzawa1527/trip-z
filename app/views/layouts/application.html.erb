@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    <script src="https://kit.fontawesome.com/56fe32fe00.js" crossorigin="anonymous"></script>
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
@@ -14,18 +14,27 @@
     <header>
       <ul class="navbar-nav ml-auto">
       <% if user_signed_in? %>
-      <li class="nav-item">
-        <%= link_to 'マイページ', my_page_path, class: 'nav-link text-dark' %>
-      </li>
-      <li class="nav-item">
-      <%= link_to '投稿一覧', posts_path, class: 'nav-link text-dark' %>
-      </li>
-      <li class="nav-item">
-        <%= link_to 'DM', posts_path, class: 'nav-link text-dark' %>
-      </li>
-      <li class="nav-item">
-      <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'nav-link text-dark' %>
-      </li>
+        <% if current_user.email != "guest@example.com" %>
+        <li class="nav-item">
+          <%= link_to 'マイページ', my_page_path, class: 'nav-link text-dark' %>
+        </li>
+        <li class="nav-item">
+        <%= link_to '投稿一覧', posts_path, class: 'nav-link text-dark' %>
+        </li>
+        <li class="nav-item">
+          <%= link_to 'DM', messages_path(current_user.id), class: 'nav-link text-dark' %>
+        </li>
+        <li class="nav-item">
+        <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'nav-link text-dark' %>
+        </li>
+        <% else %>
+        <li class="nav-item">
+        <%= link_to "About", about_path, class: 'nav-link text-dark' %>
+        </li>
+        <li class="nav-item">
+        <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'nav-link text-dark' %>
+        </li>
+        <% end %>
       
       <% elsif admin_signed_in? %>
       <li class="nav-item">
