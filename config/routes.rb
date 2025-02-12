@@ -12,12 +12,12 @@ Rails.application.routes.draw do
 
   scope module: :public do
     #homesコントローラー
-    root to:"homes#top"
-    get "about" => "homes#about"
+    root to: "homes#top"
+    get "about", to: "homes#about"
 
     #usersコントローラー
     resources :users, only: [:edit, :show, :update, :destroy]
-    get "my_page" => "users#my_page"
+    get "my_page", to: "users#my_page"
 
     #postsコントローラー
     resources :posts, only: [:new, :index, :show, :create, :edit, :update, :destroy]
