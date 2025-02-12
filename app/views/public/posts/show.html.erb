@@ -1,2 +1,23 @@
-<h1>Public::Posts#show</h1>
-<p>Find me in app/views/public/posts/show.html.erb</p>
+<h1>投稿詳細</h1>
+<%= link_to "編集する", edit_post_path, class: "btn btn-success"%>
+<table class='table'>
+  <tr>
+    <td><link_to(@post.user) do %>
+      <%= @post.user.name %>
+      <% end %>
+    </td>
+    <td>
+      <link_to @post.title, @post %>
+    </td>
+    <td>
+    <%= @post.body %>
+
+    <% if @post.user == current_user %>
+     <td>
+      <%= link_to 'edit', edit_post_path(@post), class: "btn btn-sm btn-success edit_post_#{@post.id}" %>
+     </td>
+     <td>
+      <%= link_to 'Destroy', @post, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger destroy_book_#{@post.id}" %>
+     </td>
+    <% end %>
+  </tr>
