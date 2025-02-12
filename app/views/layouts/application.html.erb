@@ -22,12 +22,18 @@
         <%= link_to '投稿一覧', posts_path, class: 'nav-link text-dark' %>
         </li>
         <li class="nav-item">
+          <%= link_to '新規投稿', new_post_path, class: 'nav-link text-dark' %>
+        </li>
+        <li class="nav-item">
           <%= link_to 'DM', messages_path(current_user.id), class: 'nav-link text-dark' %>
         </li>
         <li class="nav-item">
         <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'nav-link text-dark' %>
         </li>
         <% else %>
+        <li class="nav-item">
+        <%= link_to '投稿一覧', posts_path, class: 'nav-link text-dark' %>
+        </li>
         <li class="nav-item">
         <%= link_to "About", about_path, class: 'nav-link text-dark' %>
         </li>
