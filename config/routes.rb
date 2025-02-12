@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     #homesコントローラー
     root to: "homes#top"
     get "about", to: "homes#about"
+    post '/homes/guest_sign_in', to: 'homes#guest_sign_in'
 
     #usersコントローラー
     resources :users, only: [:edit, :show, :update, :destroy]

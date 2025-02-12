@@ -11,6 +11,67 @@
   </head>
 
   <body>
+    <header>
+      <ul class="navbar-nav ml-auto">
+      <% if user_signed_in? %>
+      <li class="nav-item">
+        <%= link_to 'マイページ', my_page_path, class: 'nav-link text-dark' %>
+      </li>
+      <li class="nav-item">
+      <%= link_to '投稿一覧', posts_path, class: 'nav-link text-dark' %>
+      </li>
+      <li class="nav-item">
+        <%= link_to 'DM', posts_path, class: 'nav-link text-dark' %>
+      </li>
+      <li class="nav-item">
+      <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'nav-link text-dark' %>
+      </li>
+      
+      <% elsif admin_signed_in? %>
+      <li class="nav-item">
+      <%= link_to '投稿一覧', admin_root_path, class: 'nav-link text-dark' %>
+      </li>
+      <li class="nav-item">
+      <%= link_to 'ユーザー一覧', admin_users_path, class: 'nav-link text-dark' %>
+      </li>
+      <li class="nav-item">
+      <%= link_to "About", admin_about_path, class: 'nav-link text-dark' %>
+      </li>
+      <li class="nav-item">
+      <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: 'nav-link text-dark' %>
+      </li>
+
+
+
+      <% else %>
+      <li class="nav-item">
+        <%= link_to "About", about_path, class: 'nav-link text-dark' %>
+      </li>
+      <li class="nav-item">
+        <%= link_to "投稿一覧", posts_path, class: 'nav-link text-dark' %>
+      </li>
+      <li class="nav-item">
+        <%= link_to "新規登録", new_user_registration_path, class: 'nav-link text-dark' %>
+      </li>
+      <li class="nav-item">
+        <%= link_to "ログイン", new_user_session_path, class: 'nav-link text-dark' %>
+      </li>
+      <% end %>
+      </ul>
+
+      <div class="row">
+        <div class="col-2 offset-8">
+          <%= form_with url: root_path do |f| %>
+            <%= f.text_field :search, placeholder: "キーワード検索" %>
+          <% end %>
+        </div>
+      </div>
+    </header>
+    <main class="mb-auto">
     <%= yield %>
+    </main>
+    <footer>
+      <p>Oz.inc</p>
+    </footer>
   </body>
 </html>
