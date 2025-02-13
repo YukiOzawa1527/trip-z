@@ -32,5 +32,9 @@ class User < ApplicationRecord
     followings.include?(user)
   end
 
+  def name
+    self.last_name + self.first_name
+  end
+
 
 end
