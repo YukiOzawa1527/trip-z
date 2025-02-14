@@ -12,113 +12,104 @@
 
   <body>
     <header>
-      <ul class="navbar-nav ml-auto">
       <% if user_signed_in? %>
-        <% if current_user.email != "guest@example.com" %>
-        <li class="nav-item">
-          <%= link_to 'マイページ', my_page_path, class: 'nav-link text-dark' %>
-        </li>
-        <li class="nav-item">
-        <%= link_to '投稿一覧', posts_path, class: 'nav-link text-dark' %>
-        </li>
-        <li class="nav-item">
-          <%= link_to '新規投稿', new_post_path, class: 'nav-link text-dark' %>
-        </li>
-        <li class="nav-item">
-          <%= link_to 'DM', messages_path(current_user.id), class: 'nav-link text-dark' %>
-        </li>
-        <li class="nav-item">
-        <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'nav-link text-dark' %>
-        </li>
-        <% else %>
-        <li class="nav-item">
-        <%= link_to '投稿一覧', posts_path, class: 'nav-link text-dark' %>
-        </li>
-        <li class="nav-item">
-        <%= link_to "About", about_path, class: 'nav-link text-dark' %>
-        </li>
-        <li class="nav-item">
-        <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'nav-link text-dark' %>
-        </li>
-        <% end %>
-      
-      <% elsif admin_signed_in? %>
-      <li class="nav-item">
-      <%= link_to '投稿一覧', admin_root_path, class: 'nav-link text-dark' %>
-      </li>
-      <li class="nav-item">
-      <%= link_to 'ユーザー一覧', admin_users_path, class: 'nav-link text-dark' %>
-      </li>
-      <li class="nav-item">
-      <%= link_to "About", admin_about_path, class: 'nav-link text-dark' %>
-      </li>
-      <li class="nav-item">
-      <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: 'nav-link text-dark' %>
-      </li>
-
-
-      <% else %>
-      <li class="nav-item">
-        <%= link_to "About", about_path, class: 'nav-link text-dark' %>
-      </li>
-      <li class="nav-item">
-        <%= link_to "投稿一覧", posts_path, class: 'nav-link text-dark' %>
-      </li>
-      <li class="nav-item">
-        <%= link_to "新規登録", new_user_registration_path, class: 'nav-link text-dark' %>
-      </li>
-      <li class="nav-item">
-        <%= link_to "ログイン", new_user_session_path, class: 'nav-link text-dark' %>
-      </li>
-      <% end %>
-      </ul>
-
-      <div class="row">
-        <div class="col-2 offset-8">
-          <%= form_with url: root_path do |f| %>
-            <%= f.text_field :search, placeholder: "キーワード検索" %>
-          <% end %>
-        </div>
-      </div>
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container">
-          <a class="navbar-brand" href="#">Navbar</a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <% if current_user.email != "guest@example.com" %>
+          <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <a class="navbar-brand" href="/my_page">マイページ</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-              <!-- ここサンプル -->
-              <% if user_signed_in? %>
-                <% if current_user.email != "guest@example.com" %>
-                  <li class="nav-item">
-                    <%= link_to 'マイページ', my_page_path, class: 'nav-link text-dark' %>
-                  </li>
-                <% end %>
-              <% elsif admin_signed_in? %>
+        
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item active">
+                <a class="nav-link" href="/posts/new">新規投稿 <span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/posts">投稿一覧</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Dropdown
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="/about">About</a>
+                  <a class="dropdown-item" href="/users/:id/messages">DM</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="/users/sign_out" data-method="delete">ログアウト</a>
+                </div>
+              </li>
+        <% else %>
+          <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="/posts">投稿一覧</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                  <a class="nav-link" href="/about">About <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="/users/sign_out" data-method="delete">ログアウト</a>
+                </li>
+        <% end %>
 
-              <% end %>
-              <!-- ここまでサンプル -->
-              <li class="nav-item">
-                <a class="nav-link" href="#">Features</a>
+        <% elsif admin_signed_in? %>
+          <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <a class="navbar-brand" href="/my_page">投稿一覧</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item active">
+                <a class="nav-link" href="/posts/new">ユーザー一覧 <span class="sr-only">(current)</span></a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Pricing</a>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Dropdown
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="/about">About</a>
+                  <a class="dropdown-item" href="/admin/sign_out" data-method="delete">ログアウト</a>
+                </div>
               </li>
-              <li class="nav-item">
-                <a class="nav-link disabled" href="#">Disabled</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
+        <% else %>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/users/sign_in">ログイン</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="/">Top <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="/users/sign_up">新規登録 <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/about">About</a>
+            </li>
+        <% end %>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+      </div>
+    </nav>
     </header>
     <main class="container">
       <%= render 'layouts/flash_messages' %>
       <%= yield %>
     </main>
-    <footer>
-      <p>Oz.inc</p>
+    <footer class="fixed-bottom text-center bg-light">
+      <p>Oz Co.</p>
     </footer>
   </body>
 </html>

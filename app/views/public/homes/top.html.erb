@@ -1,10 +1,10 @@
-<div class="row  justify-content-center">
-<div class="col-12 text-center">
-  <img src="<%= asset_path('IMG_0811.jpg') %>" class="img-fluid" style="height: 700px; width: 1725px;" alt="background image">
-</div>
-  <div class="col-3 text-center" style="position: absolute; top: 30%; left: 50%; transform: translate(-50%, -50%); color: white; background-color: rgba(60, 60, 60, 0.7); padding: 10px;">
-  <%= link_to 'ゲストとしてログインする', homes_guest_sign_in_path, method: :post %>
+<div class="container-fluid">
+  <div class="row  justify-content-center">
+    <div class="col-12">
+      <img src="<%= asset_path('IMG_0811.jpg') %>" class="img-full" style="height: 900px; width: 1400px;" alt="Full Screen Image">
+    </div>
+    <div class="col-3 text-center" style="position: absolute; top: 20%; left: 50%; transform: translate(-50%, -50%); color: white; background-color: rgba(60, 60, 60, 0.7); padding: 10px;">
+      <%= link_to 'ゲストとしてログインする', homes_guest_sign_in_path, method: :post %>
+    </div>
   </div>
-  </div>
-<div class="col-lg-3"></div>
 </div>
