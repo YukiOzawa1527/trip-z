@@ -10,3 +10,16 @@ Admin.create(
   email: "app_admin@gmail.com",
   password: "999999"
 )
+
+User.create!(
+  [
+    last_name: "テスト",
+    first_name: "太郎",
+    phone_number: "03033333333",
+    prefecture_id: "5",
+    email: "test@gmail.com",
+    password: "111111",
+    birthday: "1990/1/1",
+    introduction: "趣味は旅行です！",
+  ]
+)

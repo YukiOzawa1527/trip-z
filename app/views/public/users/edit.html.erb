@@ -20,19 +20,19 @@
   </div>
   <div class="row mt-4">
     <div class="col-md-12 text-left">
-        <label for="inputIntroduction">Introduction</label>
+        <label for="inputIntroduction">自己紹介</label>
         <%= f.text_area :introduction,class: 'form-control', id:"inputIntroduction" %>
     </div>
   </div>
   <div class="row mt-4">
     <div class="col-md-12 text-left">
-      <label for="inputImage">Image</label>
+      <label for="inputImage">プロフィール写真</label><br>
       <%= f.file_field :profile_image, placeholder: "プロフィール画像", accept: "image/*" %> 
     </div>
   </div>
   <div class="row mt-4">
     <div class="col-md-12 text-left">
-      <button type="submit" class="btn btn-success">Update User</button>
+      <button type="submit" class="btn btn-success">更新する</button>
       <% end %>
     </div>
   </div>

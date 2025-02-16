@@ -1,5 +1,5 @@
 class Public::PostsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :show, :update, :destroy]
   before_action :correct_user, only: [:edit, :update, :destroy]
 
   def new
@@ -50,6 +50,6 @@ class Public::PostsController < ApplicationController
 
   def correct_user
     @post = current_user.posts.find_by(id: params[:id])
-    redirect_to root_path unless @post
+    redirect_to posts_path unless @post
   end
 end
