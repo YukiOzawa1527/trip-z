@@ -9,8 +9,7 @@ class User < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :pictures, through: :posts
 
-  validates :first_name, presence: true, length: { maximum: 10 }
-  validates :last_name, presence: true, length: { maximum: 10 }
+  validates :name, presence: true, length: { maximum: 20 }
   validates :introduction, presence: true, length: { maximum: 200 }
 
 
@@ -38,9 +37,6 @@ class User < ApplicationRecord
     followings.include?(user)
   end
 
-  def name
-    self.last_name + self.first_name
-  end
 
   def active_for_authentication?
     super && (is_active == true)

@@ -13,13 +13,12 @@ Admin.create(
 
 User.create!(
   [
-    last_name: "テスト",
-    first_name: "太郎",
-    phone_number: "03033333333",
-    prefecture_id: "5",
-    email: "test@gmail.com",
-    password: "111111",
-    birthday: "1990/1/1",
-    introduction: "趣味は旅行です！",
+    name: "テスト次郎",
+    phone_number: "05055555555",
+    prefecture_id: 3,
+    email: "testjiro@gmail.com",
+    password: "333333",
+    birthday: "1990/3/31",
+    introduction: "趣味は旅行です",
   ]
 )
