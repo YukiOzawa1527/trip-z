@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'searches/search'
   devise_for :users,skip: [:passwords], controllers: {
     registrations: "public/registrations",
     sessions: 'public/sessions'
@@ -57,6 +58,8 @@ Rails.application.routes.draw do
     get "users/:id" => "users#update"
     get "users/:id" => "users#destroy"
   end
+
+  get '/search', to: 'searches#search'
 
 
   

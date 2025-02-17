@@ -9,6 +9,12 @@ class User < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :pictures, through: :posts
 
+  validates :first_name, presence: true, length: { maximum: 10 }
+  validates :last_name, presence: true, length: { maximum: 10 }
+  validates :introduction, presence: true, length: { maximum: 200 }
+
+
+
   #自分がフォローされる側の関係性
   has_many :reverse_of_relationships, class_name: "Relationships", foreign_key: "followed_id", dependent: :destroy
   #被フォロー関係を通じて参照→自分をフォローしている人
@@ -36,5 +42,19 @@ class User < ApplicationRecord
     self.last_name + self.first_name
   end
 
+  def active_for_authentication?
+    super && (is_active == true)
+  end
 
+  def self.search_for(content, method)
+    if method == 'perfect'
+      User.where(name: content)
+    elsif method == 'forward'
+      User.where('name LIKE ?', content + '%')
+    elsif method == 'backward'
+      User.where('name LIKE ?', '%' + content)
+    else
+      User.where('name LIKE ?', '%' + content + '%')
+    end
+  end
 end

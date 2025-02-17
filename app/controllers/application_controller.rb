@@ -7,4 +7,8 @@ class ApplicationController < ActionController::Base
     my_page_path
   end
   end
+
+  def after_sign_out_path_for(resource_or_scope)
+    about_path # ログアウト後の遷移先を指定
+  end
 end
