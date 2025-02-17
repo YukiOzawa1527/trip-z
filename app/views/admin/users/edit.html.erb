@@ -1,2 +1,53 @@
-<h1>Admin::Users#edit</h1>
-<p>Find me in app/views/admin/users/edit.html.erb</p>
+<div class -"container">
+  <div class="row mt-4">
+    <div class="col-md-3 text-left">
+      <h3>ユーザー情報</h3>
+    </div>
+    <div class="col-md-3 text-right offset-6">
+        <%= link_to '退会処理する', @user, method: :delete, data: { confirm: '本当に退会しますか？' }, class: "btn btn-sm btn-danger destroy_book_#{@user.id}" %>
+    </div>
+  </div>
+
+  <div class="row mt-4">
+    <table class='table'>
+      <tr>
+        <th>ニックネーム</th>
+        <td><%= @user.name %></td>
+      </tr>
+      <tr>
+        <th>電話番号</th>
+        <td><%= @user.phone_number %></td>
+      </tr>
+      <tr>
+        <th>都道府県</th>
+        <td><%= @user.prefecture_id %></td>
+      </tr>
+      <tr>
+        <th>誕生日</th>
+        <td><%= @user.birthday %></td>
+      </tr>
+      <tr>
+        <th>入会日</th>
+        <td><%= @user.created_at.strftime("%Y-%m-%d") %></td>
+      </tr>
+      <tr>
+        <th>自己紹介</th>
+        <td><%= @user.introduction %></td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="row mt-4">
+    <div class="col-md-3 text-left">
+      <h3>ユーザーの投稿</h3>
+    </div>
+    <div class="col-md-2 offset-7 text-right">
+      <p>投稿数:<%= @user.posts.count %></p>
+    </div>
+  </div>
+
+  <div class="row mt-4">
+    <%= render 'admin/posts/index' %>
+  </div>
+</div>
+

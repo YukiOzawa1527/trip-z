@@ -13,7 +13,6 @@ class User < ApplicationRecord
   validates :introduction, presence: true, length: { maximum: 200 }
 
 
-
   #自分がフォローされる側の関係性
   has_many :reverse_of_relationships, class_name: "Relationships", foreign_key: "followed_id", dependent: :destroy
   #被フォロー関係を通じて参照→自分をフォローしている人
@@ -53,4 +52,6 @@ class User < ApplicationRecord
       User.where('name LIKE ?', '%' + content + '%')
     end
   end
+
+
 end

@@ -1,16 +1,17 @@
-<h2>ユーザー登録</h2>
+<h3>ユーザー登録</h3>
+
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "public/shared/error_messages", resource: resource %>
 
 
   <div class="field">
-    <%= f.label :ニックネーム %><br />
+    <%= f.label :ニックネーム（最大20文字） %><br />
     <%= f.text_field :name %>
   </div>
 
   <div class="field">
-    <%= f.label :電話番号 %><br />
+    <%= f.label :電話番号（ハイフンなし） %><br />
     <%= f.text_field :phone_number %>
   </div>
 
@@ -25,7 +26,7 @@
   </div>
 
   <div class="field">
-    <%= f.label :自己紹介 %><br />
+    <%= f.label :自己紹介（最大200文字） %><br />
     <%= f.text_area :introduction %>
   </div>
 
@@ -47,9 +48,8 @@
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
 
-  <div class="actions">
-    <%= f.submit "Sign up" %>
+  <div class="actions mt-3">
+    <%= f.submit "Sign up", class: "btn btn-info" %>
   </div>
 <% end %>
-
 
