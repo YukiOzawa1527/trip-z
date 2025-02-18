@@ -1,21 +1,14 @@
 class Admin::PostsController < ApplicationController
-  before_action :authenticate_user
-  before_action :set_post, only: [:edit, :update, :destroy]
-  before_action :check_admin_or_author, only: [:edit, :update, :destroy]
-  skip_before_action :authenticate_user, only: [:edit, :update, :destroy]
+  layout 'admin'
+  before_action :authenticate_admin!
 
-  def edit
-  end
-
-  def update
+  def show
+    @post = Post.find(params[:id])
   end
 
   def destroy
-  end
-
-  def check_admin_or_author
-    unless current_user.admin? || @post.user == current_user
-      redirect_to root_path, alert: "You are not authorized to access this page."
-    end
+    @post = Post.find(params[:id])
+    @post.destroy
+    redirect_to admin_root_path
   end
 end

@@ -11,14 +11,27 @@ class Post < ApplicationRecord
   end
 
   def self.search_for(content, method)
-    if method == 'perfect'
-      Post.where(title: content)
-    elsif method == 'forward'
-      Post.where('title LIKE ?', content+'%')
-    elsif method == 'backward'
-      Post.where('title LIKE ?', '%'+content)
-    else
-      Post.where('title LIKE ?', '%'+content+'%')
+    posts = self.all
+    if content.present?
+      case method
+      when 'perfect'
+        posts = posts.where(title: content).or(
+          posts.where(body: content)
+        )
+      when 'forward'
+        posts = posts.where('title LIKE ?', content + '%').or(
+          posts.where('body LIKE ?', content + '%')
+        )
+      when 'backward'
+        posts = posts.where('title LIKE ?', '%' + content).or(
+          posts.where('body LIKE ?', '%' + content)
+        )
+      when 'partial'
+        posts = posts.where('title LIKE ?', '%' + content + '%').or(
+          posts.where('body LIKE ?', '%' + content + '%')
+        )
+      end
     end
+    posts
   end
 end

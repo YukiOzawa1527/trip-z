@@ -4,6 +4,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  scope :active_users, -> { where(is_active: true) }
+  scope :reject_users, -> { where(is_active: false) }
+
   has_many :posts, dependent: :destroy
   has_many :maps, dependent: :destroy
   has_many :favorites, dependent: :destroy
@@ -42,16 +45,34 @@ class User < ApplicationRecord
   end
 
   def self.search_for(content, method)
-    if method == 'perfect'
-      User.where(name: content)
-    elsif method == 'forward'
-      User.where('name LIKE ?', content + '%')
-    elsif method == 'backward'
-      User.where('name LIKE ?', '%' + content)
-    else
-      User.where('name LIKE ?', '%' + content + '%')
+    users = self.all
+    if content.present?
+      case method
+      when 'perfect'
+        users = users.where(name: content)
+      when 'forward'
+        users = users.where('name LIKE ?', content + '%')
+      when 'backward'
+        users = users.where('name LIKE ?', '%' + content)
+      when 'partial'
+        users = users.where('name LIKE ?', '%' + content + '%')
+      end
     end
+    users
   end
 
-
+  def self.guest
+    user = User.find_or_initialize_by(email: 'guest@example.com')
+    user.assign_attributes(
+      name: 'ゲスト太郎',
+      phone_number: '030-3333-3333',
+      prefecture_id: '5',
+      birthday: '2025/1/1',
+      introduction: 'ゲストです。',
+      is_active: true,
+      password: SecureRandom.urlsafe_base64
+    )
+    user.save
+    user
+  end
 end

@@ -1,6 +1,15 @@
 class Admin::UsersController < ApplicationController
+  layout 'admin'
+  before_action :authenticate_admin!
+
   def index
-    @users = User.all
+    @active_users = User.active_users
+    @reject_users = User.reject_users
+  end
+
+  def show
+    @user = User.find(params[:id])
+    @posts = @user.posts
   end
 
   def edit
@@ -11,7 +20,7 @@ class Admin::UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update(user_params)
-      redirect_to user_path(@user)
+      redirect_to admin_user_path(@user)
     else
       render "edit"
     end
@@ -20,14 +29,13 @@ class Admin::UsersController < ApplicationController
   def destroy
     @user = User.find(params[:id])
     @user.update(is_active: false)
-    reset_session
     flash[:notice] = "退会処理を実行しました。"
-    redirect_to new_user_registration_path
+    redirect_to admin_user_path(@user)
   end
 end
 
 private
 
 def user_params
-  params.require(:user).permit(:name, :phone_number, :prefecture_id, :email, :birthday, :introduction )
+  params.require(:user).permit(:is_active)
 end

@@ -1,16 +1,7 @@
-<div class="row mt-4">
-<table class='table'>
-  <tr>
-    <th>name</th>
-    <th>introduction</th>
-    <th></th>
-  </tr>
-  <% @users.each do |user| %>
-  <tr>
-    <td><%= user.name %></td>
-    <td><%= user.introduction %></td>
-    <td><%= link_to "詳細", admin_users_path(user), class: "btn btn-primary" %></td>
-  </tr>
-  <% end %>
-</table>
-</div>
+<h2>AlcitiveUser</h2>
+
+<%= render 'admin/users/users', users: @active_users %>
+
+<h2>RejectUser</h2>
+
+<%= render 'admin/users/users', users: @reject_users %>

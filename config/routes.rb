@@ -48,15 +48,19 @@ Rails.application.routes.draw do
     get "about" => "homes#about"
     
     #postsコントローラー
-    get "posts/:id" => "posts#edit"
-    get "posts/:id" => "posts#update"
-    get "posts/:id" => "posts#destroy"
+    resources :posts, only: [:index, :show, :destroy]
+    #get "posts/:id" => "posts#edit"
+    #get "posts/:id" => "posts#update"
+    #get "posts/:id" => "posts#destroy"
 
     #usersコントローラー
-    get "users" => "users#index"
-    get "users/:id" => "users#edit"
-    get "users/:id" => "users#update"
-    get "users/:id" => "users#destroy"
+    resources :users, only: [:index, :show, :update, :destroy]
+    # get "users" => "users#index"
+    # get "users/:id" => "users#edit"
+    # get "users/:id" => "users#update"
+    # get "users/:id" => "users#destroy"
+
+    get '/search', to: 'searches#search'
   end
 
   get '/search', to: 'searches#search'

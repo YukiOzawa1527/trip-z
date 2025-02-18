@@ -1,0 +1,14 @@
+<table class='table'>
+  <tr>
+    <th width="25%">name</th>
+    <th width="55%">introduction</th>
+    <th width="20%"></th>
+  </tr>
+  <% users.each do |user| %>
+  <tr>
+    <td><%= user.name %></td>
+    <td><%= user.introduction %></td>
+    <td><%= link_to "詳細", admin_user_path(user), class: "btn btn-primary" %></td>
+  </tr>
+  <% end %>
+</table>

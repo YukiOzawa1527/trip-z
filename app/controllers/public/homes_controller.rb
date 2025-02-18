@@ -1,4 +1,6 @@
 class Public::HomesController < ApplicationController
+  before_action :redirect_to_posts_if_logged_in, only: [:top]
+
   def top
   end
 
@@ -6,10 +8,16 @@ class Public::HomesController < ApplicationController
   end
 
   def guest_sign_in
-    user = User.find_or_create_by!(email: 'guest@example.com', name: 'ゲスト太郎', phone_number: '030-3333-3333', prefecture_id: '5', birthday: '2025/1/1', introduction: 'ゲストです。') do |user|
-      user.password = SecureRandom.urlsafe_base64
-    end
-    sign_in user
+    @user = User.guest
+    sign_in @user
     redirect_to posts_path, notice: 'ゲストユーザーとしてログインしました。'
+  end
+
+  private
+
+  def redirect_to_posts_if_logged_in
+    if user_signed_in?
+      redirect_to posts_path
+    end
   end
 end
