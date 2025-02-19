@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get 'searches/search'
   devise_for :users,skip: [:passwords], controllers: {
     registrations: "public/registrations",
     sessions: 'public/sessions'
@@ -22,11 +21,10 @@ Rails.application.routes.draw do
     get "my_page", to: "users#mypage"
 
     #postsコントローラー
-    resources :posts, only: [:new, :index, :show, :create, :edit, :update, :destroy]
-
-    #favoretesコントローラー
-    post "favorites/:id" => "favorites#create" ,as: "favorites"
-    delete "favorites/:id" => "favorites#destroy"
+    resources :posts, only: [:new, :index, :show, :create, :edit, :update, :destroy] do
+      resources :post_comments, only: [:create, :destroy]
+      resource :favorites, only: [:create, :destroy]
+    end
 
     #messagesコントローラー
     get "users/:id/messages" => "messages#index" ,as: "messages"
@@ -40,6 +38,7 @@ Rails.application.routes.draw do
     post "users/:id/relationships" => "relationships#create" ,as: "relationships"
     delete "users/:id/relationships/:id" => "relationships#destroy"
 
+
   end
 
   namespace :admin do
@@ -49,19 +48,13 @@ Rails.application.routes.draw do
     
     #postsコントローラー
     resources :posts, only: [:index, :show, :destroy]
-    #get "posts/:id" => "posts#edit"
-    #get "posts/:id" => "posts#update"
-    #get "posts/:id" => "posts#destroy"
 
     #usersコントローラー
     resources :users, only: [:index, :show, :update, :destroy]
-    # get "users" => "users#index"
-    # get "users/:id" => "users#edit"
-    # get "users/:id" => "users#update"
-    # get "users/:id" => "users#destroy"
 
     get '/search', to: 'searches#search'
   end
+
 
   get '/search', to: 'searches#search'
 

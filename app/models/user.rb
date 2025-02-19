@@ -8,6 +8,7 @@ class User < ApplicationRecord
   scope :reject_users, -> { where(is_active: false) }
 
   has_many :posts, dependent: :destroy
+  has_many :post_comments, dependent: :destroy
   has_many :maps, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :pictures, through: :posts

@@ -12,10 +12,12 @@ class Public::PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
+    @post_comment = PostComment.new
   end
 
   def create
     @post = current_user.posts.new(post_params)
+    @post.pictures.attach(params[:post][:picture])
     if @post.save
       flash[:notice] = "success"
       redirect_to post_path(@post)
@@ -23,6 +25,7 @@ class Public::PostsController < ApplicationController
       flash.now[:alert] = "failed"
       render :new
     end
+  
   end
 
   def edit
@@ -45,7 +48,7 @@ class Public::PostsController < ApplicationController
 
   private
   def post_params
-    params.require(:post).permit(:picture, :title, :body)
+    params.require(:post).permit(:title, :body)
   end
 
   def correct_user
