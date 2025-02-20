@@ -9,6 +9,7 @@ class Public::PostsController < ApplicationController
 
   def index
     @posts = Post.all
+    @pictures = Picture.where(post_id: @posts.pluck(:id))
   end
 
   def show

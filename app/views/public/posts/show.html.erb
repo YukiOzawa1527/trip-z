@@ -7,7 +7,7 @@
   <div class="row mt-4">
     <div class="col-md-12">
       <table class='table'>
-        <tr>
+        <tr class="table-row">
           <th>ユーザー名</th>
           <td>
             <%= link_to(@post.user) do %>
@@ -27,8 +27,7 @@
         <th>写真</th>
         <td>
           <% @pictures.each do |picture| %>
-              <%= image_tag picture.image, size: "500x350" if picture.image.attached? %>
-              <%= link_to "削除", [@post, picture], method: :delete, class: "btn btn-md btn-danger" %>
+              <%= image_tag picture.image, size: "900x500" if picture.image.attached? %>
           <% end %>
         </td>
       </tr>
@@ -47,10 +46,3 @@
   <%= render "post_comments/form", post: @post, post_comment: @post_comment %>
 
 </div>
-
-
-
-<%= form_with model: [@post, @picture] do |f| %>
-  <%= f.file_field :image %>
-  <%= f.submit "投稿" %>
-<% end %>

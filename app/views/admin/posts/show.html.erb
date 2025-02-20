@@ -25,7 +25,11 @@
         </tr>
         <tr>
           <th>写真</th>
-          <td></td>
+          <td>
+            <% @pictures.each do |picture| %>
+              <%= image_tag picture.image, size: "900x500" if picture.image.attached? %>
+            <% end %>
+          </td>
         </tr>
         <tr>
           <td colspan=2>

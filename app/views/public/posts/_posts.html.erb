@@ -17,7 +17,9 @@
         <td><%= post.user.name %></td>
         <td><%= post.body %></td>
         <td>
-        
+          <% post.pictures.each do |picture| %>
+            <%= image_tag picture.image, size: "70x40" if picture.image.attached? %>
+          <% end %>
         </td>
         <td><%= render "favorites/btn", post: post %></td>
         <td><%=post.post_comments.count %></td>
