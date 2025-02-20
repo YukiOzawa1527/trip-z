@@ -24,6 +24,7 @@ Rails.application.routes.draw do
     resources :posts, only: [:new, :index, :show, :create, :edit, :update, :destroy] do
       resources :post_comments, only: [:create, :destroy]
       resource :favorites, only: [:create, :destroy]
+      resources :pictures, only: [:create, :destroy]
     end
 
     #messagesコントローラー

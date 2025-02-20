@@ -16,8 +16,10 @@
         <td><%= post.title %></td>
         <td><%= post.user.name %></td>
         <td><%= post.body %></td>
-        <td></td>
-        <td><%= render "favorites/btn", post: @post %></td>
+        <td>
+        
+        </td>
+        <td><%= render "favorites/btn", post: post %></td>
         <td><%=post.post_comments.count %></td>
         <td><%= link_to "詳細", post_path(post), class: "btn btn-primary" %></td>  
       </tr>

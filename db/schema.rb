@@ -63,6 +63,7 @@ ActiveRecord::Schema.define(version: 2025_02_19_074142) do
   end
 
   create_table "maps", force: :cascade do |t|
+    t.string "title"
     t.decimal "latitude"
     t.decimal "longitude"
   end
@@ -79,7 +80,7 @@ ActiveRecord::Schema.define(version: 2025_02_19_074142) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "post_id", null: false
-    t.integer "map_id", null: false
+    t.integer "map_id"
   end
 
   create_table "post_comments", force: :cascade do |t|

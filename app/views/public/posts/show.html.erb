@@ -25,7 +25,12 @@
         </tr>
         <tr>
         <th>写真</th>
-        <td></td>
+        <td>
+          <% @pictures.each do |picture| %>
+              <%= image_tag picture.image, size: "500x350" if picture.image.attached? %>
+              <%= link_to "削除", [@post, picture], method: :delete, class: "btn btn-md btn-danger" %>
+          <% end %>
+        </td>
       </tr>
         <% if @post.user == current_user %>
           <tr>
@@ -42,3 +47,10 @@
   <%= render "post_comments/form", post: @post, post_comment: @post_comment %>
 
 </div>
+
+
+
+<%= form_with model: [@post, @picture] do |f| %>
+  <%= f.file_field :image %>
+  <%= f.submit "投稿" %>
+<% end %>

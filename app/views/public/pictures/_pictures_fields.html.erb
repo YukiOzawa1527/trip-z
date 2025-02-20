@@ -1,0 +1,11 @@
+<div class="nested-fields">
+  <div class="field">
+    <%= picture.label :image %>
+    <%= image_tag picture.object.image, width: "200px" if picture.object.image.attached? %>
+    <%= picture.file_field :image %>
+  </div>
+  <div class="field">
+    <%= link_to_remove_association "写真を削除", picture %>
+  </div>
+  <hr>
+</div>

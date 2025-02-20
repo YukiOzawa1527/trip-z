@@ -4,6 +4,7 @@ class Public::PostsController < ApplicationController
 
   def new
     @post = Post.new
+    @picture = @post.pictures.build
   end
 
   def index
@@ -13,11 +14,12 @@ class Public::PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
     @post_comment = PostComment.new
+    @picture = Picture.new
+    @pictures = @post.pictures
   end
 
   def create
     @post = current_user.posts.new(post_params)
-    @post.pictures.attach(params[:post][:picture])
     if @post.save
       flash[:notice] = "success"
       redirect_to post_path(@post)
@@ -29,6 +31,7 @@ class Public::PostsController < ApplicationController
   end
 
   def edit
+
   end
 
   def update
@@ -48,7 +51,7 @@ class Public::PostsController < ApplicationController
 
   private
   def post_params
-    params.require(:post).permit(:title, :body)
+    params.require(:post).permit(:title, :body, pictures_attributes: [:id, :_destroy, :image])
   end
 
   def correct_user
