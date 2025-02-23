@@ -60,4 +60,6 @@ class Public::PostsController < ApplicationController
     @post = current_user.posts.find_by(id: params[:id])
     redirect_to posts_path unless @post
   end
+
+  
 end

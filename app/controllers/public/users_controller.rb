@@ -44,4 +44,5 @@ class Public::UsersController < ApplicationController
     @user = User.find(params[:id])
     redirect_to(my_page_url) unless current_user == @user
   end
+  
 end

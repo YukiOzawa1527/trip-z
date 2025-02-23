@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  get 'post_reviews/create'
-  get 'post_reviews/destroy'
   devise_for :users,skip: [:passwords], controllers: {
     registrations: "public/registrations",
     sessions: 'public/sessions'

@@ -24,6 +24,12 @@
           <td><%= @post.body %></td>
         </tr>
         <tr>
+          <th>レビュー</th>
+          <td>
+            <%= render 'post_reviews/static_rate',post: @post %>
+          </td>
+        </tr>
+        <tr>
           <th>写真</th>
           <td>
             <% @pictures.each do |picture| %>
