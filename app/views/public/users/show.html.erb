@@ -43,10 +43,14 @@
       </thead>
       <tbody>
         <% @posts.each do |post| %>
+          
         <tr>
           <td><%= link_to post.title, post_path(post.id) %></td>
           <td><%= post.body %></td>
           <td>
+            <% post.pictures.each do |picture| %>
+              <%= image_tag picture.image, size: "100x50" if picture.image.attached? %>
+            <% end %>
           </td>
         </tr>
         <% end %>

@@ -9,7 +9,7 @@ $(document).on('turbolinks:load', function() {
     starOn: "<%= asset_path('star-on.png') %>",
     starOff: "<%= asset_path('star-off.png') %>",
     starHalf: "<%= asset_path('star-half.png') %>",
-    score: "<%= post.star %>",
+    score: "<%= post_review.star %>",
     readOnly: true,
   };
   raty(elem, opt);

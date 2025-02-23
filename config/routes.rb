@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'post_reviews/create'
+  get 'post_reviews/destroy'
   devise_for :users,skip: [:passwords], controllers: {
     registrations: "public/registrations",
     sessions: 'public/sessions'
@@ -23,6 +25,7 @@ Rails.application.routes.draw do
     #postsコントローラー
     resources :posts, only: [:new, :index, :show, :create, :edit, :update, :destroy] do
       resources :post_comments, only: [:create, :destroy]
+      resources :post_reviews, only: [:create, :destroy]
       resource :favorites, only: [:create, :destroy]
       resources :pictures, only: [:create, :destroy]
     end

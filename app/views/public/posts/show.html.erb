@@ -7,7 +7,7 @@
   <div class="row mt-4">
     <div class="col-md-12">
       <table class='table'>
-        <tr class="table-row">
+        <tr>
           <th>ユーザー名</th>
           <td>
             <%= link_to(@post.user) do %>
@@ -27,7 +27,7 @@
         <th>写真</th>
         <td>
           <% @pictures.each do |picture| %>
-              <%= image_tag picture.image, size: "900x500" if picture.image.attached? %>
+              <%= image_tag picture.image, size: "300x190" if picture.image.attached? %>
           <% end %>
         </td>
       </tr>
@@ -44,5 +44,6 @@
   </div>
   <%= render "post_comments/index", post: @post %>
   <%= render "post_comments/form", post: @post, post_comment: @post_comment %>
+  <%= render "post_reviews/form", post: @post, post_review: @post_review %>
 
 </div>

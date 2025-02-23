@@ -52,7 +52,7 @@ class Public::PostsController < ApplicationController
 
   private
   def post_params
-    params.require(:post).permit(:title, :body, pictures_attributes: [:id, :_destroy, :image], :star)
+    params.require(:post).permit(:title, :body, pictures_attributes: [:id, :_destroy, :image])
   end
 
   def correct_user
