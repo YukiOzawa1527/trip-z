@@ -24,7 +24,9 @@
         </td>
         <td><%= render "favorites/btn", post: post %></td>
         <td><%=post.post_comments.count %></td>
-       
+        <td>
+            <%= render 'post_reviews/static_rate',post: post %>
+        </td>
         <td><%= link_to "詳細", post_path(post), class: "btn btn-primary" %></td>  
       </tr>
     <% end %>

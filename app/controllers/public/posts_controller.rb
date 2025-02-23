@@ -17,6 +17,7 @@ class Public::PostsController < ApplicationController
     @post_comment = PostComment.new
     @picture = Picture.new
     @pictures = @post.pictures
+    @post_review = PostReview.new
   end
 
   def create

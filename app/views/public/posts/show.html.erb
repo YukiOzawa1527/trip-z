@@ -24,6 +24,11 @@
           <td><%= @post.body %></td>
         </tr>
         <tr>
+        <tr>
+          <th>レビュー</th>
+          <td><%= render 'post_reviews/static_rate',post: @post %></td>
+        </tr>
+        <tr>
         <th>写真</th>
         <td>
           <% @pictures.each do |picture| %>
@@ -44,6 +49,8 @@
   </div>
   <%= render "post_comments/index", post: @post %>
   <%= render "post_comments/form", post: @post, post_comment: @post_comment %>
-  <%= render "post_reviews/form", post: @post, post_review: @post_review %>
+  <% if current_user != @post.user %>
+    <%= render "post_reviews/form", post: @post, post_review: @post_review %>
+  <% end %>
 
 </div>
