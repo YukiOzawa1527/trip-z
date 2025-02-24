@@ -3,6 +3,7 @@ class Post < ApplicationRecord
   validates :body, presence: true, length: { maximum: 200 }
 
   has_many :pictures, dependent: :destroy
+  validates :pictures, presence: true
   accepts_nested_attributes_for :pictures, reject_if: :all_blank, allow_destroy: true
 
 

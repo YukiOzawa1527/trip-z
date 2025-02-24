@@ -65,7 +65,7 @@
   </div>
 
   <div class="row mt-4">
-    <%= render 'admin/posts/index' %>
+    <%= render partial: 'admin/posts/index', locals: { posts: @posts } %>
   </div>
 </div>
 
