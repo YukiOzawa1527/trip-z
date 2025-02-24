@@ -1,7 +1,10 @@
 <% if @model == 'user' %>
-	<h3 class="mt-4">検索結果 "<%= @content %>"</h3>
+	<h3 class="mt-4">ユーザー検索結果 "<%= @content %>"</h3>
   <%= render 'public/users/index', users: @records %>
 <% elsif @model == 'post' %>
-	<h3 class="mt-4">検索結果 "<%= @content %>"</h3>
+	<h3 class="mt-4">投稿検索結果 "<%= @content %>"</h3>
+  <%= render 'public/posts/posts', posts: @records %>
+<% elsif @model == 'book' || @model == 'tag' %>
+	<h3 class="mt-4">タグ検索結果 "<%= @content %>"</h3>
   <%= render 'public/posts/posts', posts: @records %>
 <% end %>

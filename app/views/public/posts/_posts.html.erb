@@ -4,7 +4,8 @@
       <th width="10%">タイトル</th>
       <th width="10%">ユーザー名</th>
       <th width="20%">説明文</th>
-      <th width="20%">写真</th>
+      <th width="10%">タグ</th>
+      <th width="10%">写真</th>
       <th width="10%">いいね</th>
       <th width="10%">コメント数</th>
       <th width="15%">レビュー</th>
@@ -17,6 +18,11 @@
         <td><%= post.title %></td>
         <td><%= post.user.name %></td>
         <td><%= post.body %></td>
+        <td>
+          <% post.tags.each do |tag|%>
+            <%= link_to tag.name, search_path(content: tag.name,model: "tag",method: "perfect") %> 
+          <% end%>
+        </td>
         <td>
           <% post.pictures.each do |picture| %>
             <%= image_tag picture.image, size: "70x40" if picture.image.attached? %>

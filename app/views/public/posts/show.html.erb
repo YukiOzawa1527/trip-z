@@ -24,6 +24,13 @@
           <td><%= @post.body %></td>
         </tr>
         <tr>
+          <th>タグ</th>
+          <td>
+            <% @post.tags.each do |tag|%>
+              <%= link_to tag.name, search_path(content: tag.name,model: "tag",method: "perfect") %> 
+            <% end%>
+          </td>
+        </tr>
         <tr>
           <th>レビュー</th>
           <td><%= render 'post_reviews/static_rate',post: @post %></td>
@@ -51,7 +58,7 @@
   <%= render "post_comments/form", post: @post, post_comment: @post_comment %>
   <% if current_user != @post.user && !@post.post_reviews.map(&:user_id).include?(current_user.id) %>
     <%= render "post_reviews/form", post: @post, post_review: @post_review %>
-  <% else %>
+  <% elsif @post.post_reviews.exists?(user_id: current_user.id) %>
      <%= link_to "レビューを削除", post_post_review_path(post_id: @post.id, id: @post.post_reviews.find_by(user_id: current_user.id).id), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-md btn-danger destroy_book_#{@post_review.id}" %>
   <% end %>
 

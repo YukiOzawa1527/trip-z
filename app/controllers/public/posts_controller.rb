@@ -22,7 +22,9 @@ class Public::PostsController < ApplicationController
 
   def create
     @post = current_user.posts.new(post_params)
+    tag_list = params[:post][:tag_name].split(',')
     if @post.save
+      @post.save_tags(tag_list)
       flash[:notice] = "success"
       redirect_to post_path(@post)
     else
