@@ -8,7 +8,7 @@
             <%= post_comment.user.name %>
           <% end %>
         </td>
-        <td width="75%"><%= post_comment.comment %></td>
+        <td width="75%">:<%= post_comment.comment %></td>
         <td width="10%">
           <% if post_comment.user == current_user %>
             <%= link_to "削除", post_post_comment_path(post, post_comment), method: :delete, class: "btn btn-danger pull-right" %>

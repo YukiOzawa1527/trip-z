@@ -14,7 +14,7 @@
     <header>
       <%= render 'layouts/navigation' %>
     </header>
-    <main class="container">
+    <main class="<% action_name == 'top' ? 'container-fluid':'container' %>">
       <%= render 'layouts/flash_messages' %>
       <%= yield %>
     </main>

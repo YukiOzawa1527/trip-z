@@ -59,7 +59,7 @@
   <% if current_user != @post.user && !@post.post_reviews.map(&:user_id).include?(current_user.id) %>
     <%= render "post_reviews/form", post: @post, post_review: @post_review %>
   <% elsif @post.post_reviews.exists?(user_id: current_user.id) %>
-     <%= link_to "レビューを削除", post_post_review_path(post_id: @post.id, id: @post.post_reviews.find_by(user_id: current_user.id).id), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-md btn-danger destroy_book_#{@post_review.id}" %>
+     <%= link_to "レビューを削除", post_post_review_path(post_id: @post.id, id: @post.post_reviews.find_by(user_id: current_user.id).id), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-md btn-danger mt-2 destroy_book_#{@post_review.id}" %>
   <% end %>
 
 </div>

@@ -1,8 +1,8 @@
 <% if user_signed_in? || admin_signed_in? %>
-  <%= form_with url: url, method: :get, local: true, class: "form-inline my-2 my-lg-0 ml-5" do |f| %>
-    <%= f.text_field :content, class: "form-control form-control-sm" %>
+  <%= form_with url: url, method: :get, local: true, class: "form-inline my-2 my-lg-0 ml-3" do |f| %>
+    <%= f.search_field :content, class: "form-control form-control-sm", placeholder: "Tag" %>
     <%= f.hidden_field :model, :value => "tag"  %>
     <%= f.hidden_field :method, :value => "perfect" %>
-    <%= f.submit 'タグ', class: "btn btn-outline-success" %>
+    <%= f.submit 'タグ検索', class: "btn btn-outline-success" %>
   <% end %>
 <% end %>

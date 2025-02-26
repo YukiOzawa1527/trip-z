@@ -1,8 +1,8 @@
-<div class="form-group" id="star_form">
+<div class="form-group mt-3" id="star_form">
   <%= form_with(model:[post, post_review], local: true) do |f| %>
-    <%= f.label :レビュー %>
+    <%= f.label :レビュー, class: 'h3' %>
     <div id="post_raty"></div>
-  <%= f.submit class: 'btn btn-success' %>
+  <%= f.submit "レビューを送信", class: 'btn btn-success mt-2' %>
 </div>
 </div>
   <script>

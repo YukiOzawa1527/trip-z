@@ -3,11 +3,13 @@
   <tr>
     <th>ユーザー名</th>
     <th>自己紹介</th>
+    <th>詳細</th>
   </tr>
   <% users.each do |user| %>
   <tr>
     <td><%= user.name %></td>
     <td><%= user.introduction %></td>
+    <td><%= link_to "詳細", user_path(user), class: "btn btn-primary" %></td>
   </tr>
   <% end %>
 </table>
