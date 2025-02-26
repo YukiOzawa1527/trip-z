@@ -17,7 +17,7 @@ Rails.application.routes.draw do
     post '/homes/guest_sign_in', to: 'homes#guest_sign_in'
 
     #usersコントローラー
-    resources :users, only: [:edit, :show, :update, :destroy]
+    resources :users, only: [:edit, :index, :show, :update, :destroy]
     get "my_page", to: "users#mypage"
 
     #postsコントローラー
