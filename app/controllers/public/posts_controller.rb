@@ -23,6 +23,14 @@ class Public::PostsController < ApplicationController
   def create
     @post = current_user.posts.new(post_params)
     tag_list = params[:post][:tag_name].split(',')
+    @post.score = Language.get_data(post_params[:body])
+    pictures_attributes = post_params[:pictures_attributes]
+    images = pictures_attributes.values.map { |picture| picture[:image]}
+    vision_tags = []
+    images.each do |image|
+      tag_list.concat(Vision.get_image_data(image))
+    end
+
     if @post.save
       @post.save_tags(tag_list)
       flash[:notice] = "success"
@@ -38,7 +46,17 @@ class Public::PostsController < ApplicationController
   end
 
   def update
+    tag_list = params[:post][:tag_name].split(',')
+    @post.score = Language.get_data(post_params[:body])
+    pictures_attributes = post_params[:pictures_attributes]
+    images = pictures_attributes.values.map { |picture| picture[:image]}
+    vision_tags = []
+    images.each do |image|
+      tag_list.concat(Vision.get_image_data(image)) if image
+    end
+
     if @post.update(post_params)
+      @post.save_tags(tag_list.uniq)
       flash[:notice] = "success"
       redirect_to post_path(@post)
     else
