@@ -26,7 +26,6 @@ class Public::PostsController < ApplicationController
     @post.score = Language.get_data(post_params[:body])
     pictures_attributes = post_params[:pictures_attributes]
     images = pictures_attributes.values.map { |picture| picture[:image]}
-    vision_tags = []
     images.each do |image|
       tag_list.concat(Vision.get_image_data(image))
     end
@@ -50,7 +49,6 @@ class Public::PostsController < ApplicationController
     @post.score = Language.get_data(post_params[:body])
     pictures_attributes = post_params[:pictures_attributes]
     images = pictures_attributes.values.map { |picture| picture[:image]}
-    vision_tags = []
     images.each do |image|
       tag_list.concat(Vision.get_image_data(image)) if image
     end
